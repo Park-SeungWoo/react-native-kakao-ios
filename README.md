@@ -74,3 +74,50 @@
 > >   >    >  }
 > >   >    >  ...
 > >   >    > ```
+>
+> ### Implementation
+>
+> > ```javascript
+> > import Kakaologins from '@react-native-seoul/kakao-login';
+> > import RNKakaoLink from 'react-native-kakao-links';
+> > ...
+> > // kakao login
+> > const _login = () => {
+> >     console.log('log in');
+> >     Kakaologins.login().then((res) => {
+> >       console.log(res.accessToken);
+> >     });
+> > };
+> > // kakao link
+> > const _share = async () => {
+> >     console.log('share');
+> >     try {
+> >       const options = {
+> >         objectType: 'location', //required
+> >         content: {
+> >           title: 'location', //required
+> >           link: {
+> >             iosExecutionParams: 'id=0',
+> >           }, //required
+> >           imageURL: 'https://i.stack.imgur.com/lQQjg.png', //required
+> >         }, //required
+> >         address: '인천 광역시 부평구 일신동 12-24',
+> >         addressTitle: 'My house',
+> >         buttons: [
+> >           {
+> >             title: '앱으로 이동', //required
+> >             link: {
+> >               iosExecutionParams: 'id=0',
+> >             },
+> >           },
+> >         ],
+> >       };
+> >       // you can change options via referencing react-native-kakao-links readme
+> >       const mes = await RNKakaoLink.link(options);
+> >       console.log(mes);
+> >     } catch (e) {
+> >       console.warn(e);
+> >     }
+> >   };
+> > ...
+> > ```
